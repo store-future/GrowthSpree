@@ -60,22 +60,31 @@ class TaskCreateView(APIView):
         if serializer.is_valid():
             serializer.save(user=user)  # Save the task with the logged-in user as the creator
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response({"message":"error"}, status=status.HTTP_400_BAD_REQUEST)
 
 
 # Update tasks - Only the creator of the task or an admin can update a task
+
+
 class TaskUpdateView(APIView):
     permission_classes = [IsAuthenticated]
 
     def put(self, request, id):
-        task = get_object_or_404(Tasks, id=id)  
+        task = get_object_or_404(Tasks, id=id)
+
+        # Debugging: Print incoming request data
 
         # Checking if the user is the task creator or an admin
         if request.user == task.user or request.user.is_staff:
-            serializer = TaskSerializer(task, data=request.data)
+            serializer = TaskSerializer(task, data=request.data, partial=True)  # Allow partial updates
+            
             if serializer.is_valid():
-                serializer.save()  
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_200_OK)  # Success response
+            
+            # Debugging: Print serializer errors
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
         return Response({"error": "You do not have permission to update this task."}, status=status.HTTP_403_FORBIDDEN)
 
 

@@ -45,8 +45,7 @@ def get_tokens_for_user(user):
 class UserRegistrationView(APIView):
 
   def post(self, request, format=None):
-    serializer = UserRegistrationSerializer(data=request.data)
-    
+    serializer = UserRegistrationSerializer(data=request.data)    
     serializer.is_valid(raise_exception=True) 
     user = serializer.save()
     token = get_tokens_for_user(user)
@@ -60,6 +59,7 @@ class UserLoginView(APIView):
     serializer.is_valid(raise_exception=True)
     email = serializer.data.get('email')
     password = serializer.data.get('password')
+    print("inside")
     user = authenticate(email=email, password=password)
     if user is not None:
       token = get_tokens_for_user(user)
