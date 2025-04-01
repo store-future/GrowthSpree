@@ -1,0 +1,4 @@
+env/
+/accounts/__pycache__/
+/tasks/__pycache__/
+/taskmaster/__pycache__/
