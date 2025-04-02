@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 
-export const API_BASE_URL = "http://localhost:8000"; 
+export const API_BASE_URL = "http://192.168.1.7:8000"; 
 
 export const getAccessToken = () => localStorage.getItem("access_token");
 

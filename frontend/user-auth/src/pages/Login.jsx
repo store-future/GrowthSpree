@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import { getAccessToken, refreshAccessToken, verifyRefreshToken } from "../services/auth";
+import { API_BASE_URL } from "../services/auth";
 import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap
 
-const API_BASE_URL = "http://localhost:8000"; // Django backend URL
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -56,7 +56,7 @@ const Login = () => {
       }
     } catch (error) {
       console.error("Login Error:", error);
-      setMessage("An error occurred. Please try again.");
+      // setMessage("An error occurred. Please try again.");
     }
   };
 
