@@ -1,0 +1,39 @@
+# .dockerignore
+
+# Git
+.git
+.gitignore
+
+# Python virtual environment (based on your structure)
+env/
+venv/
+*.venv
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Docker specific files
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.idea/
+.vscode/
+
+# Database file (if you map it as a volume, excluding it here
+# ensures the build doesn't include an old version. If you want the
+# initial db included in the image, comment the line below)
+# db.sqlite3
+
+# Other potentially large or unnecessary files/folders
+# e.g., media files if handled separately
+# media/
+# staticfiles_collected/ # If you collect static files outside the container
+*.log
